@@ -147,6 +147,17 @@ void levelOrder(node* root) {
             q.push(temp->right);
     }
 }
+bool searchIterative(node* root, int key) {
+    while (root != NULL) {
+        if (root->data == key)
+            return true;
+        else if (key < root->data)
+            root = root->left;
+        else
+            root = root->right;
+    }
+    return false;
+}
 
 /* ---------- Main Menu ---------- */
 
@@ -164,6 +175,8 @@ int main() {
         cout << "\n6. Iterative Preorder";
         cout << "\n7. Iterative Postorder";
         cout << "\n8. Level Order Traversal";
+        cout << "\n9. Search Node";
+
         cout << "\n0. Exit";
         cout << "\nEnter choice: ";
         cin >> choice;
@@ -202,6 +215,16 @@ int main() {
             case 8:
                 levelOrder(root);
                 break;
+
+            case 9:
+            cout << "Enter value to search: ";
+            cin >> val;
+            if (searchIterative(root, val))
+            cout << "Value found in BST";
+            else
+            cout << "Value NOT found in BST";
+            break;
+
 
             case 0:
                 cout << "Exiting program";
