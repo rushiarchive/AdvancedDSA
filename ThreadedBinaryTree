@@ -1,10 +1,65 @@
-#include<iostream>
-
+#include <iostream>
 using namespace std;
-struct node{
-int  data ;
-node *left,*right;
-int lbit,rbit;
+
+struct node {
+    int data;
+    node *left, *right;
+    int lbit, rbit;
+};
+
+node* createHead();
+node* insert(node* head, int key);
+
+void inorderRecursive(node* root);
+void preorderRecursive(node* root);
+void postorderRecursive(node* root);
+
+void inorderNonRecursive(node* root);
+void preorderNonRecursive(node* root);
+node* inorderSuccessor(node* ptr);
+
+int main() {
+    return 0;
 }
 
-void insert(node *
+node* createHead() {
+    node* head = new node();
+    head->data = 999;
+    head->lbit = 0;
+    head->rbit = 1;
+
+    head->left = head;
+    head->right = head;
+
+    return head;
+}
+
+node* insert(node* head, int key) {
+    node* ptr = head->left;
+    node* par = head;
+
+    while (ptr != head) {
+        if (key == ptr->data) {
+            cout << "Duplicate data!";
+            return head;
+        }
+
+        par = ptr;
+
+        if (key < ptr->data) {
+            if (ptr->lbit == 1) {   // fixed ==
+                ptr = ptr->left;
+            } else {
+                break;
+            }
+        } else {
+            if (ptr->rbit == 1) {   // fixed ==
+                ptr = ptr->right;
+            } else {
+                break;
+            }
+        }
+    }
+
+    return head;
+}
